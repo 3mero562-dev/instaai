@@ -6,13 +6,14 @@ from fastapi.security import OAuth2PasswordRequestForm
 import models
 import schemas
 import auth
+import webhook
 from database import engine, get_db
 
 # Initialize database tables
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="InstaAI SaaS API")
-
+app.include_router(webhook.router, prefix="/api")
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,
