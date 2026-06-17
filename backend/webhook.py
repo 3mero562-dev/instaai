@@ -1,6 +1,5 @@
 import os
 import token
-from turtle import mode
 from dotenv import load_dotenv
 load_dotenv()
 import requests
