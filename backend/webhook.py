@@ -66,6 +66,8 @@ async def verify_webhook(request: Request):
     token = params.get("hub.verify_token")
     challenge = params.get("hub.challenge")
 
+    print("TOKEN RECEIVED =", token)
+    print("TOKEN EXPECTED =", FB_VERIFY_TOKEN)
     print("MODE =", mode)
     print("TOKEN =", token)
     print("EXPECTED =", FB_VERIFY_TOKEN)
