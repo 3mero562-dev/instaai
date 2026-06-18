@@ -38,7 +38,7 @@ async def process_incoming_message(payload: dict, db: Session):
 
                 # Find the user associated with this Instagram Page ID
                 user = db.query(models.User).filter(models.User.instagram_page_id == recipient_id).first()
-                
+
                 if not user or not user.instagram_access_token:
                     continue
 
@@ -52,9 +52,19 @@ async def process_incoming_message(payload: dict, db: Session):
 
                 # Generate AI Response
                 ai_reply = ai_service.generate_ai_reply(user, message_text, db)
-                
+
                 if ai_reply:
-                    send_instagram_message(sender_id, ai_reply, user.instagram_access_token)
+                    print("SENDER ID =", sender_id)
+                    print("AI REPLY =", ai_reply)
+                    print("TOKEN =", user.instagram_access_token)
+
+                    result = send_instagram_message(
+                        sender_id,
+                        ai_reply,
+                        user.instagram_access_token
+                    )
+
+                    print("INSTAGRAM RESPONSE =", result)
 
     except Exception as e:
         print(f"Error processing webhook: {e}")
