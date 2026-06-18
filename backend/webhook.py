@@ -1,3 +1,4 @@
+
 import os
 import token
 from dotenv import load_dotenv
@@ -77,7 +78,10 @@ async def verify_webhook(request: Request):
 
 @router.post("/webhook")
 async def handle_webhook(request: Request, background_tasks: BackgroundTasks, db: Session = Depends(get_db)):
+    body = await request.body()
+    print("RAW BODY =", body)
     payload = await request.json()
+    print("WEBHOOK RECEIVED =", payload)
     
     # Meta requires a 200 OK response quickly
     background_tasks.add_task(process_incoming_message, payload, db)

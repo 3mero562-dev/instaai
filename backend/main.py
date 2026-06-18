@@ -65,6 +65,17 @@ def login(
         "access_token": access_token,
         "token_type": "bearer"
     }
+@app.get("/api/user/me")
+def get_me(
+    current_user: models.User = Depends(auth.get_current_user)
+):
+    return {
+        "name": current_user.email,
+        "botStatus": current_user.bot_status,
+        "instagramPageId": current_user.instagram_page_id,
+        "businessDescription": current_user.business_description,
+        "aiInstructions": current_user.ai_instructions
+    }
 # User & Bot Settings
 @app.get("/api/user/me", response_model=schemas.UserResponse)
 def get_me(current_user: models.User = Depends(auth.get_current_user)):
