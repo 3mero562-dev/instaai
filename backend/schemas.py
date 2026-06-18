@@ -27,6 +27,7 @@ class BotSettingsUpdate(BaseModel):
 class UserResponse(UserBase):
     id: int
     instagram_page_id: Optional[str] = None
+    instagram_access_token: Optional[str] = None
     bot_status: str
     business_description: Optional[str] = None
     ai_instructions: Optional[str] = None
