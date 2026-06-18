@@ -17,12 +17,14 @@ router = APIRouter()
 FB_VERIFY_TOKEN = os.getenv("FB_VERIFY_TOKEN", "my_secure_token_123")
 
 def send_instagram_message(recipient_id: str, message_text: str, access_token: str):
-    url = f"https://graph.facebook.com/v19.0/me/messages?access_token={access_token}"
+    url = f"https://graph.facebook.com/v19.0/{recipient_id}/messages?access_token={access_token}"
     payload = {
         "recipient": {"id": recipient_id},
         "message": {"text": message_text}
     }
     response = requests.post(url, json=payload)
+    print(response.status_code)
+    print(response.text)
     print("INSTAGRAM RESPONSE =", response.text)
     return response.json()
 
