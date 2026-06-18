@@ -1,6 +1,8 @@
 
 import os
 import token
+from urllib import response
+from urllib import response
 from dotenv import load_dotenv
 load_dotenv()
 import requests
@@ -21,6 +23,7 @@ def send_instagram_message(recipient_id: str, message_text: str, access_token: s
         "message": {"text": message_text}
     }
     response = requests.post(url, json=payload)
+    print("INSTAGRAM RESPONSE =", response.text)
     return response.json()
 
 async def process_incoming_message(payload: dict, db: Session):
