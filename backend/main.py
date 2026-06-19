@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 from fastapi.security import OAuth2PasswordRequestForm
+from fastapi.staticfiles import StaticFiles
 import models
 import schemas
 import auth
@@ -14,6 +15,8 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="InstaAI SaaS API")
 app.include_router(webhook.router, prefix="/api")
+app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
+
 # CORS Configuration
 app.add_middleware(
     CORSMiddleware,

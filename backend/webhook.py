@@ -17,19 +17,24 @@ router = APIRouter()
 FB_VERIFY_TOKEN = os.getenv("FB_VERIFY_TOKEN", "my_secure_token_123")
 
 def send_instagram_message(recipient_id: str, message_text: str, access_token: str):
-    url = f"https://graph.facebook.com/v19.0/me/messages"
+
+    url = "https://graph.facebook.com/v25.0/me/messages"
+
     payload = {
         "recipient": {"id": recipient_id},
-        "message": {"text": message_text}
+        "message": {"text": message_text},
+        "messaging_type": "RESPONSE"
     }
+
     response = requests.post(
-    url,
-    headers={"Authorization": f"Bearer {access_token}"},
-    json=payload
-)
+        url,
+        params={"access_token": access_token},
+        json=payload
+    )
+
     print(response.status_code)
     print(response.text)
-    print("INSTAGRAM RESPONSE =", response.text)
+
     return response.json()
 
 async def process_incoming_message(payload: dict, db: Session):
