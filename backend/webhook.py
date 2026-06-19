@@ -73,7 +73,8 @@ async def process_incoming_message(payload: dict, db: Session):
                 if ai_reply:
                     print("SENDER ID =", sender_id)
                     print("AI REPLY =", ai_reply)
-                    print("FULL TOKEN =", repr(user.instagram_access_token))
+                    print("TOKEN TYPE =", type(access_token))
+                    print("TOKEN REPR =", repr(access_token))
                     print("TOKEN LENGTH =", len(user.instagram_access_token))
                     print("TOKEN START =", user.instagram_access_token[:20])
                     print("TOKEN END =", user.instagram_access_token[-20:])
