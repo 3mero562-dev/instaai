@@ -25,7 +25,8 @@ def send_instagram_message(recipient_id: str, message_text: str, access_token: s
         "message": {"text": message_text},
         "messaging_type": "RESPONSE"
     }
-
+    print("TOKEN =", access_token)
+    print("TOKEN LENGTH =", len(access_token))
     response = requests.post(
         url,
         params={"access_token": access_token},
