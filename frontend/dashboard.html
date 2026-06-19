@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>InstaAI - لوحة التحكم</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <h2 style="color: var(--primary-color); margin-bottom: 2rem;">InstaAI</h2>
+            <nav>
+                <a href="dashboard.html" class="nav-link active">الرئيسية</a>
+                <a href="settings.html" class="nav-link">الإعدادات</a>
+                <a href="#" onclick="logout()" class="nav-link" style="color: var(--danger); margin-top: 2rem;">تسجيل الخروج</a>
+            </nav>
+        </aside>
+        <main class="main-content">
+            <header style="margin-bottom: 2rem;">
+                <h1>مرحباً بك، <span id="userName">...</span></h1>
+            </header>
+            
+            <div class="card">
+                <h3>ملخص الحالة</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem;">
+                        <p class="text-muted">حالة البوت</p>
+                        <h4 id="botStatusLabel">تحميل...</h4>
+                    </div>
+                    <div style="background: #f3f4f6; padding: 1rem; border-radius: 0.5rem;">
+                        <p class="text-muted">Instagram Page ID</p>
+                        <h4 id="pageIdLabel">تحميل...</h4>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAuth();
+            loadDashboard();
+        });
+    </script>
+</body>
+</html>
