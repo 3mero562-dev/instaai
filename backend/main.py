@@ -15,7 +15,7 @@ models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="InstaAI SaaS API")
 app.include_router(webhook.router, prefix="/api")
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
+app.mount("/", StaticFiles(directory="frontend", html=True), name="frontend")
 
 # CORS Configuration
 app.add_middleware(
