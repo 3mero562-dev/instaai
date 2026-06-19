@@ -53,10 +53,12 @@ async def process_incoming_message(payload: dict, db: Session):
 
                 # Find the user associated with this Instagram Page ID
                 user = db.query(models.User).filter(models.User.instagram_page_id == recipient_id).first()
+                print("RECIPIENT ID =", recipient_id)
+                print("USER FOUND =", user)
 
                 if not user or not user.instagram_access_token:
+                    print("USER NOT FOUND OR TOKEN MISSING")
                     continue
-
                 # Check Bot Status
                 if user.bot_status == "disabled" or user.bot_status == "human_takeover":
                     continue
