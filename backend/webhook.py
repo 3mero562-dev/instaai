@@ -91,7 +91,9 @@ async def process_incoming_message(payload: dict, db: Session):
     except Exception as e:
         print(f"Error processing webhook: {e}")
 
-@router.get("/webhook")
+from fastapi.responses import PlainTextResponse
+
+@router.get("/webhook", response_class=PlainTextResponse)
 async def verify_webhook(request: Request):
     params = request.query_params
     mode = params.get("hub.mode")
@@ -105,7 +107,7 @@ async def verify_webhook(request: Request):
     print("EXPECTED =", FB_VERIFY_TOKEN)
     print("CHALLENGE =", challenge)
     if mode == "subscribe" and token == FB_VERIFY_TOKEN:
-        return int(challenge)
+        return (challenge)
     return {"error": "Verification failed"}
 
 @router.post("/webhook")
